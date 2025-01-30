@@ -1,0 +1,163 @@
+:root {
+    --neon-green: #39ff14;
+    --neon-blue: #00ffff;
+    --dark-bg: #0a0a0a;
+    --cyber-gray: #1a1a1a;
+}
+
+body {
+    background: var(--dark-bg);
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Cyberpunk Effects */
+.cyber-lines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(90deg, var(--dark-bg) 21px, transparent 1%) center,
+        linear-gradient(var(--dark-bg) 21px, transparent 1%) center,
+        var(--neon-green);
+    background-size: 22px 22px;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('path/to/noise-texture.png');
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+/* Glitch Effect */
+.cyber-glitch {
+    position: relative;
+    color: var(--neon-green);
+    text-shadow: 0 0 5px var(--neon-green);
+}
+
+.cyber-glitch::before,
+.cyber-glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.cyber-glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 #ff00ff;
+    animation: glitch-1 2s infinite linear alternate-reverse;
+}
+
+.cyber-glitch::after {
+    left: -2px;
+    text-shadow: 2px 0 #00ffff;
+    animation: glitch-2 3s infinite linear alternate-reverse;
+}
+
+/* Cyber Cards */
+.cyber-card {
+    background: var(--cyber-gray);
+    border: 1px solid var(--neon-green);
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.3);
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.cyber-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--neon-green);
+    animation: scan-line 2s linear infinite;
+}
+
+/* Terminal Effect */
+.cyber-terminal {
+    background: var(--cyber-gray);
+    border: 1px solid var(--neon-green);
+    padding: 20px;
+    font-family: 'Courier New', monospace;
+}
+
+.terminal-content .typing {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid var(--neon-green);
+    animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+/* Cyber Button */
+.cyber-button {
+    position: relative;
+    padding: 15px 30px;
+    color: var(--neon-green);
+    background: transparent;
+    border: 1px solid var(--neon-green);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.cyber-button:hover {
+    background: var(--neon-green);
+    color: var(--dark-bg);
+    box-shadow: 0 0 20px var(--neon-green);
+}
+
+/* Animations */
+@keyframes scan-line {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+@keyframes glitch-1 {
+    0% { transform: none; opacity: 1; }
+    7% { transform: skew(-0.5deg, -0.9deg); opacity: 0.75; }
+    10% { transform: none; opacity: 1; }
+    27% { transform: none; opacity: 1; }
+    30% { transform: skew(0.8deg, -0.1deg); opacity: 0.75; }
+    35% { transform: none; opacity: 1; }
+}
+
+@keyframes glitch-2 {
+    0% { transform: none; opacity: 0.25; }
+    7% { transform: translate(-2px, 3px); opacity: 0.5; }
+    10% { transform: none; opacity: 0.25; }
+    27% { transform: none; opacity: 0.25; }
+    30% { transform: translate(-5px, -2px); opacity: 0.5; }
+    35% { transform: none; opacity: 0.25; }
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--neon-green) }
+} 

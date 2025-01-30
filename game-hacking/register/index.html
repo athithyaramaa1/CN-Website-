@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Hacking and Reverse Engineering Workshop - Cybernerds KARE</title>
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="/CSS/register.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+    <script src="/JAVASCRIPT/matrix.js"></script>
+
+    <header class="header">
+        <a href="/" class="logo">{Cybernerds KARE}</a>
+        <div class="menu-btn">
+            <i class='bx bx-menu'></i>
+        </div>
+        <nav class="navbar">
+            <a href="/" style="--i: 1">Home</a>
+            <a href="/game-hacking" style="--i: 2">Back to Event</a>
+        </nav>
+    </header>
+
+    <div class="menu-overlay"></div>
+
+    <section class="registration">
+        <div class="registration-content">
+            <h2>Game Hacking and Reverse Engineering Workshop Registration</h2>
+            <form id="registrationForm">
+                <!-- Team Leader -->
+                <div class="team-section">
+                    <h3>Team Leader</h3>
+                    <div class="form-group">
+                        <input type="text" id="leaderName" name="leaderName" required>
+                        <label>Full Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="leaderRegNo" name="leaderRegNo" required>
+                        <label>Registration Number</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="leaderDepartment" name="leaderDepartment" required>
+                        <label>Department</label>
+                    </div>
+                    <div class="form-group">
+                        <select id="leaderYear" name="leaderYear" required>
+                            <option value="">Select Year</option>
+                            <option value="2">2nd Year</option>
+                            <option value="3">3rd Year</option>
+                            <option value="4">4th Year</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="leaderPhone" name="leaderPhone" pattern="[0-9]{10}" required>
+                        <label>Phone Number</label>
+                    </div>
+                </div>
+
+                <!-- Problem Statement Selection -->
+                <div class="team-section">
+                    <h3>Problem Statement Selection</h3>
+                    <div class="form-group">
+                        <select id="problemStatement" name="problemStatement" required>
+                            <option value="">Select Problem Statement</option>
+                            <!-- Will be populated dynamically -->
+                        </select>
+                        <p id="problemAvailability" class="availability-message"></p>
+                    </div>
+                    <div class="problem-description" id="problemDescription">
+                        <!-- Problem description will be shown here -->
+                    </div>
+                </div>
+
+                <!-- Team Members -->
+<!-- Inside the form, after the team leader section -->
+                <div class="team-members-container">
+                    <h3>Team Members</h3>
+                    <div class="team-section" id="teamMembers">
+                        <!-- Team members will be dynamically added here -->
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Register Team</button>
+            </form>
+        </div>
+    </section>
+
+    <script src="../../JAVASCRIPT/register.js"></script>
+
+    <style>
+        /* Hamburger menu styles */
+        .menu-btn {
+            display: none;
+            color: #00ffff;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        /* Mobile navbar styles */
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+            }
+
+            .navbar {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: rgba(19, 21, 29, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                transition: 0.3s ease;
+                border-left: 1px solid rgba(0, 255, 255, 0.1);
+                z-index: 95;
+            }
+
+            .navbar.active {
+                right: 0;
+            }
+
+            .navbar a {
+                font-size: 1.2rem;
+                padding: 0.8rem 2rem;
+                width: 80%;
+                text-align: center;
+                border: 1px solid rgba(0, 255, 255, 0.1);
+                border-radius: 0.5rem;
+            }
+
+            .navbar a:hover {
+                background: rgba(0, 255, 255, 0.1);
+            }
+
+            /* Overlay when menu is open */
+            .menu-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(3px);
+                z-index: 90;
+            }
+
+            .menu-overlay.active {
+                display: block;
+            }
+        }
+
+        /* Registration form responsive styles */
+        @media (max-width: 576px) {
+            .registration-content {
+                padding: 1rem;
+                margin-top: 4rem;
+            }
+
+            .registration-content h2 {
+                font-size: 1.5rem;
+                text-align: center;
+            }
+
+            .team-section {
+                padding: 1rem;
+            }
+
+            .team-section h3 {
+                font-size: 1.2rem;
+            }
+
+            .form-group {
+                margin-bottom: 1rem;
+            }
+
+            .form-group input,
+            .form-group select {
+                padding: 0.7rem;
+                font-size: 0.9rem;
+            }
+
+            .form-group label {
+                font-size: 0.9rem;
+            }
+
+            .submit-btn {
+                padding: 0.8rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Landscape phones */
+        @media (min-width: 576px) and (max-width: 767px) {
+            .registration-content {
+                padding: 1.5rem;
+            }
+
+            .team-section {
+                padding: 1.2rem;
+            }
+        }
+
+        /* Tablets */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .registration-content {
+                max-width: 720px;
+                margin: 5rem auto 2rem;
+            }
+        }
+
+        /* Small desktops */
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .registration-content {
+                max-width: 960px;
+                margin: 5rem auto 2rem;
+            }
+        }
+
+        /* Large desktops */
+        @media (min-width: 1200px) {
+            .registration-content {
+                max-width: 1140px;
+                margin: 5rem auto 2rem;
+            }
+        }
+
+        /* Handle different aspect ratios */
+        @media (max-aspect-ratio: 16/9) {
+            .registration-content {
+                margin-top: max(4rem, 10vh);
+            }
+        }
+
+        /* Handle very small heights */
+        @media (max-height: 600px) {
+            .registration-content {
+                margin-top: 3.5rem;
+            }
+
+            .team-section {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Safe area insets for notched phones */
+        @supports (padding: max(0px)) {
+            .registration-content {
+                padding-left: max(1rem, env(safe-area-inset-left));
+                padding-right: max(1rem, env(safe-area-inset-right));
+            }
+        }
+    </style>
+
+    <script>
+        const menuBtn = document.querySelector('.menu-btn');
+        const navbar = document.querySelector('.navbar');
+        const overlay = document.querySelector('.menu-overlay');
+        const menuIcon = menuBtn.querySelector('i');
+
+        menuBtn.addEventListener('click', () => {
+            navbar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            
+            // Toggle menu icon
+            if (navbar.classList.contains('active')) {
+                menuIcon.classList.remove('bx-menu');
+                menuIcon.classList.add('bx-x');
+            } else {
+                menuIcon.classList.remove('bx-x');
+                menuIcon.classList.add('bx-menu');
+            }
+        });
+
+        // Close menu when clicking overlay
+        overlay.addEventListener('click', () => {
+            navbar.classList.remove('active');
+            overlay.classList.remove('active');
+            menuIcon.classList.remove('bx-x');
+            menuIcon.classList.add('bx-menu');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.navbar a').forEach(link => {
+            link.addEventListener('click', () => {
+                navbar.classList.remove('active');
+                overlay.classList.remove('active');
+                menuIcon.classList.remove('bx-x');
+                menuIcon.classList.add('bx-menu');
+            });
+        });
+    </script>
+</body>
+</html> 

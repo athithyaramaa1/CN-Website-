@@ -1,0 +1,169 @@
+.registration {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 10% 0;
+}
+
+.registration-content {
+    max-width: 800px;
+    width: 100%;
+    background: rgba(0, 128, 0, 0.1);
+    padding: 40px;
+    border-radius: 10px;
+    animation: fadeIn 1s ease forwards;
+}
+
+.registration-content h2 {
+    color: rgb(0, 255, 0);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.team-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    border-radius: 5px;
+}
+
+.team-section h3 {
+    color: rgb(0, 255, 0);
+    margin-bottom: 20px;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+}
+
+.form-group label {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.7);
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+.form-group input:focus ~ label,
+.form-group input:valid ~ label {
+    top: -10px;
+    font-size: 12px;
+    background: black;
+    padding: 0 5px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: rgb(0, 128, 0);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    background: rgb(0, 180, 0);
+}
+
+.team-members-container {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.team-members-container h3 {
+    color: rgb(0, 255, 0);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#teamMembers {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#teamMembers .team-section {
+    margin: 0;
+    background: rgba(0, 128, 0, 0.1);
+    border: 1px solid rgba(0, 255, 0, 0.3);
+}
+
+.form-group select {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.form-group select option {
+    background: black;
+    color: white;
+}
+
+.problem-description {
+    margin-top: 15px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    display: none;
+}
+
+.problem-description:not(:empty) {
+    display: block;
+}
+
+.problem-description-text {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.teams-assigned {
+    color: rgb(0, 255, 0);
+    font-size: 0.9em;
+}
+
+.availability-message {
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: rgb(0, 255, 0);
+}
+
+.availability-message.unavailable {
+    color: rgb(255, 0, 0);
+}
+
+#problemStatement {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    border-radius: 5px;
+}
+
+#problemStatement option {
+    background: black;
+    color: white;
+} 

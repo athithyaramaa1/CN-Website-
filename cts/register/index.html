@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Cyber Tech Sprint</title>
+    <link rel="stylesheet" href="../../CSS/style.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        .registration-content {
+            padding: 2rem;
+            margin-top: 5rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            color: #00ffff;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            color: #ffffff90;
+            font-size: 1.2rem;
+        }
+
+        .registration-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(19, 21, 29, 0.8);
+            border: 1px solid #00ffff40;
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: #00ffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid #00ffff40;
+            border-radius: 0.5rem;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #00ffff;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 255, 255, 0.2);
+            border: none;
+            border-radius: 0.5rem;
+            color: #00ffff;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: rgba(0, 255, 255, 0.3);
+        }
+
+        .error-message {
+            color: #ff4444;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .icon-circle {
+            aspect-ratio: 1;
+            width: 8rem;
+            border-radius: 50%;
+            background: rgba(0, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .icon-circle i {
+            color: #00ffff;
+            font-size: 4rem;
+        }
+
+        /* Hamburger menu styles */
+        .menu-btn {
+            display: none;
+            color: #00ffff;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        /* Mobile navbar styles */
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+            }
+
+            .navbar {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: rgba(19, 21, 29, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                transition: 0.3s ease;
+                border-left: 1px solid rgba(0, 255, 255, 0.1);
+                z-index: 95;
+            }
+
+            .navbar.active {
+                right: 0;
+            }
+
+            .navbar a {
+                font-size: 1.2rem;
+                padding: 0.8rem 2rem;
+                width: 80%;
+                text-align: center;
+                border: 1px solid rgba(0, 255, 255, 0.1);
+                border-radius: 0.5rem;
+            }
+
+            .navbar a:hover {
+                background: rgba(0, 255, 255, 0.1);
+            }
+
+            /* Overlay when menu is open */
+            .menu-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(3px);
+                z-index: 90;
+            }
+
+            .menu-overlay.active {
+                display: block;
+            }
+        }
+
+        /* Registration form responsive styles */
+        @media (max-width: 576px) {
+            .registration-content {
+                padding: 1rem;
+                margin-top: 4rem;
+            }
+
+            .registration-content h2 {
+                font-size: 1.5rem;
+                text-align: center;
+                margin-bottom: 2rem;
+            }
+
+            .form-group {
+                margin-bottom: 1.5rem;
+            }
+
+            .form-group input,
+            .form-group select {
+                padding: 0.7rem;
+                font-size: 0.9rem;
+                width: 100%;
+            }
+
+            .form-group label {
+                font-size: 0.9rem;
+                margin-bottom: 0.3rem;
+            }
+
+            .submit-btn {
+                padding: 0.8rem;
+                font-size: 1rem;
+                width: 100%;
+            }
+
+            .error-message {
+                font-size: 0.85rem;
+                margin-top: 0.3rem;
+            }
+        }
+
+        /* Landscape phones */
+        @media (min-width: 576px) and (max-width: 767px) {
+            .registration-content {
+                padding: 1.5rem;
+                max-width: 540px;
+                margin: 4rem auto;
+            }
+        }
+
+        /* Tablets */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .registration-content {
+                max-width: 720px;
+                margin: 5rem auto;
+                padding: 2rem;
+            }
+        }
+
+        /* Small desktops */
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .registration-content {
+                max-width: 960px;
+                margin: 5rem auto;
+            }
+        }
+
+        /* Large desktops */
+        @media (min-width: 1200px) {
+            .registration-content {
+                max-width: 1140px;
+                margin: 5rem auto;
+            }
+        }
+
+        /* Handle different aspect ratios */
+        @media (max-aspect-ratio: 16/9) {
+            .registration-content {
+                margin-top: max(4rem, 10vh);
+            }
+        }
+
+        /* Handle very small heights */
+        @media (max-height: 600px) {
+            .registration-content {
+                margin-top: 3.5rem;
+            }
+
+            .registration-content h2 {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Safe area insets for notched phones */
+        @supports (padding: max(0px)) {
+            .registration-content {
+                padding-left: max(1rem, env(safe-area-inset-left));
+                padding-right: max(1rem, env(safe-area-inset-right));
+            }
+        }
+
+        /* High DPI Screens */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .registration-content {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+        }
+
+        /* Fix for floating labels on mobile */
+        @media (max-width: 768px) {
+            .form-group {
+                position: relative;
+            }
+
+            .form-group label {
+                position: absolute;
+                top: -0.5rem;
+                left: 0.5rem;
+                background: rgba(19, 21, 29, 0.9);
+                padding: 0 0.5rem;
+                font-size: 0.8rem;
+                color: #00ffff;
+            }
+
+            .form-group input,
+            .form-group select {
+                padding-top: 0.8rem;
+                background: rgba(0, 255, 255, 0.1);
+            }
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 0.2rem;
+            accent-color: #00ffff;
+            cursor: pointer;
+        }
+
+        .checkbox-label {
+            color: #ffffff90;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            cursor: pointer;
+        }
+
+        .checkbox-label a {
+            color: #00ffff;
+            text-decoration: none;
+        }
+
+        .checkbox-label a:hover {
+            text-decoration: underline;
+        }
+
+        /* Add to your mobile media queries */
+        @media (max-width: 576px) {
+            .checkbox-group {
+                gap: 0.6rem;
+            }
+
+            .checkbox-label {
+                font-size: 0.85rem;
+            }
+
+            .checkbox-group input[type="checkbox"] {
+                width: 18px;
+                height: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+    <script src="../../JAVASCRIPT/matrix.js"></script>
+
+    <header class="header">
+        <a href="#" class="logo">{Cybernerds KARE}</a>
+        <div class="menu-btn">
+            <i class='bx bx-menu'></i>
+        </div>
+        <nav class="navbar">
+            <a href="/" style="--i: 1">Home</a>
+            <a href="/cts" style="--i: 2">CTF Event</a>
+            <a href="/cts/register" style="--i: 3">Register Now</a>
+        </nav>
+    </header>
+
+    <div class="menu-overlay"></div>
+
+    <section class="registration-content">
+        <div class="section-header">
+            <h1 class="section-title">Register for Round 1</h1>
+            <p class="section-subtitle">Join the Cyber Tech Sprint Challenge</p>
+        </div>
+
+        <form id="registrationForm" class="registration-form">
+            <div class="icon-circle">
+                <i class='bx bx-user-plus'></i>
+            </div>
+            
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="registrationNumber">Registration Number</label>
+                <input type="text" id="registrationNumber" name="registrationNumber" required>
+            </div>
+
+            <div class="form-group">
+                <label for="year">Year</label>
+                <select id="year" name="year" required>
+                    <option value="">Select Year</option>
+                    <option value="1">1st Year</option>
+                    <option value="2">2nd Year</option>
+                    <option value="3">3rd Year</option>
+                    <option value="4">4th Year</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="stream">Stream</label>
+                <select id="stream" name="stream" required>
+                    <option value="">Select Stream</option>
+                    <option value="CSE">Computer Science Engineering</option>
+                    <option value="IT">Information Technology</option>
+                    <option value="ECE">Electronics and Communication</option>
+                    <option value="EEE">Electrical and Electronics</option>
+                    <option value="MECH">Mechanical Engineering</option>
+                    <option value="CIVIL">Civil Engineering</option>
+                </select>
+            </div>
+
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="whatsappVerify" name="whatsappVerify" required>
+                <label for="whatsappVerify" class="checkbox-label">
+                    I confirm that I have joined the <a style="color: #00ff51; padding: 0 0.2rem; background-color: #00ff515b; border-radius: 0.2rem;" href="https://chat.whatsapp.com/GiqykegzNIsGgUhZBhL6cP" target="_blank">WhatsApp group</a>
+                </label>
+            </div>
+
+            <button type="submit" class="submit-btn">Register Now</button>
+            <div id="errorMessage" class="error-message"></div>
+        </form>
+    </section>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const errorMessage = document.getElementById('errorMessage');
+            const submitBtn = document.querySelector('.submit-btn');
+            const whatsappVerify = document.getElementById('whatsappVerify');
+            
+            if (!whatsappVerify.checked) {
+                errorMessage.textContent = 'Please join the WhatsApp group before registering';
+                return;
+            }
+            
+            try {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Registering...';
+                
+                const formData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    registrationNumber: document.getElementById('registrationNumber').value,
+                    year: document.getElementById('year').value,
+                    stream: document.getElementById('stream').value
+                };
+
+                const response = await fetch('https://cybernerds.vercel.app/api/ctf/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert('Registration successful!');
+                    window.location.href = '/cts';
+                } else {
+                    throw new Error(data.error);
+                }
+            } catch (error) {
+                errorMessage.textContent = error.message;
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Register Now';
+            }
+        });
+
+        const menuBtn = document.querySelector('.menu-btn');
+        const navbar = document.querySelector('.navbar');
+        const overlay = document.querySelector('.menu-overlay');
+        const menuIcon = menuBtn.querySelector('i');
+
+        menuBtn.addEventListener('click', () => {
+            navbar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            
+            // Toggle menu icon
+            if (navbar.classList.contains('active')) {
+                menuIcon.classList.remove('bx-menu');
+                menuIcon.classList.add('bx-x');
+            } else {
+                menuIcon.classList.remove('bx-x');
+                menuIcon.classList.add('bx-menu');
+            }
+        });
+
+        // Close menu when clicking overlay
+        overlay.addEventListener('click', () => {
+            navbar.classList.remove('active');
+            overlay.classList.remove('active');
+            menuIcon.classList.remove('bx-x');
+            menuIcon.classList.add('bx-menu');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.navbar a').forEach(link => {
+            link.addEventListener('click', () => {
+                navbar.classList.remove('active');
+                overlay.classList.remove('active');
+                menuIcon.classList.remove('bx-x');
+                menuIcon.classList.add('bx-menu');
+            });
+        });
+    </script>
+</body>
+</html>

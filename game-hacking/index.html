@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Hacking Workshop - Cybernerds KARE</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/game-hacking.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        /* Hamburger menu styles */
+        .menu-btn {
+            display: none;
+            color: #00ffff;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        /* Mobile navbar styles */
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+            }
+
+            .navbar {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: rgba(19, 21, 29, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                transition: 0.3s ease;
+                border-left: 1px solid rgba(0, 255, 255, 0.1);
+                z-index: 95;
+            }
+
+            .navbar.active {
+                right: 0;
+            }
+
+            .navbar a {
+                font-size: 1.2rem;
+                padding: 0.8rem 2rem;
+                width: 80%;
+                text-align: center;
+                border: 1px solid rgba(0, 255, 255, 0.1);
+                border-radius: 0.5rem;
+            }
+
+            .navbar a:hover {
+                background: rgba(0, 255, 255, 0.1);
+            }
+
+            /* Overlay when menu is open */
+            .menu-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(3px);
+                z-index: 90;
+            }
+
+            .menu-overlay.active {
+                display: block;
+            }
+        }
+
+        /* Base responsive styles */
+        @media (max-width: 768px) {
+            .workshop-content {
+                padding: 1rem;
+                margin-top: 4rem;
+            }
+
+            .workshop-content h2 {
+                font-size: 1.8rem;
+                text-align: center;
+            }
+
+            .speaker-card {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .speaker-image {
+                width: 150px;
+                height: 150px;
+                margin: 0 auto 1rem;
+            }
+
+            .speaker-info h4 {
+                text-align: center;
+                font-size: 1.3rem;
+            }
+
+            .speaker-title {
+                text-align: center;
+                font-size: 1rem;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 0.5rem;
+            }
+
+            .benefit-card {
+                padding: 1rem;
+            }
+
+            .benefit-card i {
+                font-size: 2rem;
+            }
+
+            .workshop-details {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .detail-item {
+                width: 100%;
+                padding: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Landscape phones */
+        @media (min-width: 576px) and (max-width: 767px) {
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .workshop-details {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .detail-item {
+                width: calc(50% - 1rem);
+            }
+        }
+
+        /* Tablets */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .workshop-content {
+                padding: 2rem;
+            }
+
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .speaker-image {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        /* Small desktops */
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .workshop-content {
+                max-width: 960px;
+                margin: 0 auto;
+            }
+        }
+
+        /* Large desktops */
+        @media (min-width: 1200px) {
+            .workshop-content {
+                max-width: 1140px;
+                margin: 0 auto;
+            }
+        }
+
+        /* Handle different aspect ratios */
+        @media (max-aspect-ratio: 16/9) {
+            .workshop-content {
+                margin-top: max(4rem, 10vh);
+            }
+        }
+
+        /* Handle very small heights */
+        @media (max-height: 600px) {
+            .workshop-content {
+                margin-top: 3.5rem;
+            }
+
+            .speaker-card {
+                margin: 1rem 0;
+            }
+
+            .benefits-grid {
+                gap: 0.8rem;
+            }
+        }
+
+        /* High DPI Screens */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .speaker-image {
+                image-rendering: -webkit-optimize-contrast;
+            }
+        }
+
+        /* Safe area insets for notched phones */
+        @supports (padding: max(0px)) {
+            .workshop-content {
+                padding-left: max(1rem, env(safe-area-inset-left));
+                padding-right: max(1rem, env(safe-area-inset-right));
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .workshop-content {
+                margin: 0;
+                padding: 0;
+            }
+
+            .header, .menu-btn, .menu-overlay, .cta-buttons {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+    <script src="../JAVASCRIPT/matrix.js"></script>
+
+    <header class="header">
+        <a href="#" class="logo">{Cybernerds KARE}</a>
+        <div class="menu-btn">
+            <i class='bx bx-menu'></i>
+        </div>
+        <nav class="navbar">
+            <a href="/" style="--i: 1">Home</a>
+            <a href="/game-hacking/problem-statements" style="--i: 2">Problem Statements</a>
+            <a href="/game-hacking/register" style="--i: 3">Register Now</a>
+        </nav>
+    </header>
+
+    <div class="menu-overlay"></div>
+
+    <section class="workshop">
+        <div class="workshop-content">
+            <h2>Game Hacking and Reverse Engineering Workshop</h2>
+            
+            <div class="speaker-section">
+                <h3>Meet Your Expert</h3>
+                <div class="speaker-card">
+                    <img src="https://i.ibb.co/cS1TzMwb/1731390802936-1.png" alt="Sanchay Mittal" class="speaker-image">
+                    <div class="speaker-info">
+                        <h4>Sanchay Singh</h4>
+                        <p class="speaker-title">Security Researcher & Game Hacking Expert</p>
+                        <p class="speaker-bio">An experienced security researcher specializing in game hacking, reverse engineering, and malware analysis. With extensive experience in the cybersecurity industry, Sanchay brings practical insights and hands-on expertise to help you master game hacking techniques.</p>
+                        <a href="https://in.linkedin.com/in/sanchayofficial" target="_blank" class="speaker-linkedin">
+                            <i class='bx bxl-linkedin'></i> Connect on LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <i class='bx bx-certification'></i>
+                    <h4>Professional Certificate</h4>
+                    <p>Receive an industry-recognized certificate validating your game hacking and reverse engineering skills</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class='bx bx-book-open'></i>
+                    <h4>Academic Credits</h4>
+                    <p>Earn 2 Experiential Elective Credits towards your academic progress</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class='bx bx-code-block'></i>
+                    <h4>Hands-on Experience</h4>
+                    <p>Work on real game hacking challenges and reverse engineering projects</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class='bx bx-trophy'></i>
+                    <h4>Project Expo</h4>
+                    <p>Showcase your work at the post-workshop project exposition</p>
+                </div>
+            </div>
+
+            <div class="workshop-details">
+                <div class="detail-item">
+                    <i class='bx bx-calendar'></i>
+                    <div>
+                        <h4>Date & Time</h4>
+                        <p>26th February 2025, 9:30 AM - 5:30 PM</p>
+                    </div>
+                </div>
+                
+                <div class="detail-item">
+                    <i class='bx bx-map'></i>
+                    <div>
+                        <h4>Venue</h4>
+                        <p>Room 8003, KARE Campus</p>
+                    </div>
+                </div>
+                
+                <div class="detail-item">
+                    <i class='bx bx-money'></i>
+                    <div>
+                        <h4>Registration Fee</h4>
+                        <p>Nothing!!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="/game-hacking/problem-statements" class="btn btn-secondary">View Problem Statements</a>
+                <a href="/game-hacking/register" class="btn btn-primary">Register Now</a>
+            </div>
+        </div>
+    </section>
+
+    <script src="JAVASCRIPT/matrix.js"></script>
+    <script>
+        const menuBtn = document.querySelector('.menu-btn');
+        const navbar = document.querySelector('.navbar');
+        const overlay = document.querySelector('.menu-overlay');
+        const menuIcon = menuBtn.querySelector('i');
+
+        menuBtn.addEventListener('click', () => {
+            navbar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            
+            // Toggle menu icon
+            if (navbar.classList.contains('active')) {
+                menuIcon.classList.remove('bx-menu');
+                menuIcon.classList.add('bx-x');
+            } else {
+                menuIcon.classList.remove('bx-x');
+                menuIcon.classList.add('bx-menu');
+            }
+        });
+
+        // Close menu when clicking overlay
+        overlay.addEventListener('click', () => {
+            navbar.classList.remove('active');
+            overlay.classList.remove('active');
+            menuIcon.classList.remove('bx-x');
+            menuIcon.classList.add('bx-menu');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.navbar a').forEach(link => {
+            link.addEventListener('click', () => {
+                navbar.classList.remove('active');
+                overlay.classList.remove('active');
+                menuIcon.classList.remove('bx-x');
+                menuIcon.classList.add('bx-menu');
+            });
+        });
+    </script>
+</body>
+</html> 

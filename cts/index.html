@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Tech Sprint - Cybernerds KARE</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        .ctf-content {
+            padding: 2rem;
+            margin-top: 5rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            color: #00ffff;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            color: #ffffff90;
+            font-size: 1.2rem;
+        }
+
+        .rounds-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .round-card {
+            background: rgba(19, 21, 29, 0.8);
+            border: 1px solid #00ffff40;
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .round-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .icon-circle {
+            aspect-ratio: 1;
+            width: 4rem;
+            border-radius: 50%;
+            background: rgba(0, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .icon-circle i {
+            color: #00ffff;
+            font-size: 1.8rem;
+        }
+
+        .round-title {
+            color: #00ffff;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .round-description {
+            color: #ffffff90;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .registration-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(19, 21, 29, 0.8);
+            border: 1px solid #00ffff40;
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: #00ffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid #00ffff40;
+            border-radius: 0.5rem;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #00ffff;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 255, 255, 0.2);
+            border: none;
+            border-radius: 0.5rem;
+            color: #00ffff;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: rgba(0, 255, 255, 0.3);
+        }
+
+        .error-message {
+            color: #ff4444;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .prize-section {
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .prize-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .prize-card {
+            background: rgba(19, 21, 29, 0.8);
+            border: 1px solid #00ffff40;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .prize-icon {
+            aspect-ratio: 1;
+            width: 4rem;
+            border-radius: 50%;
+            background: rgba(0, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .prize-icon i {
+            color: #00ffff;
+            font-size: 1.8rem;
+        }
+
+        .prize-title {
+            color: #00ffff;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .prize-description {
+            color: #00ffff90;
+            line-height: 1.6;
+        }
+
+        .info-text {
+            color: #00ffff90;
+            line-height: 1.8;
+            text-align: center;
+            max-width: 800px;
+            margin: 2rem auto;
+            font-size: 1.1rem;
+        }
+
+        .highlight {
+            color: #00ffff;
+            font-weight: 600;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: rgba(0, 255, 255, 0.2);
+            border: 1px solid #00ffff40;
+            border-radius: 0.5rem;
+            color: #00ffff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .cta-button:hover {
+            background: rgba(0, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .whatsapp-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            background: #25D366;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-size: 1.1rem;
+            margin: 2rem auto;
+            max-width: fit-content;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .whatsapp-button i {
+            font-size: 1.5rem;
+        }
+
+        .whatsapp-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        /* Base mobile styles - for portrait phones */
+        @media (max-width: 576px) {
+            .ctf-content {
+                padding: 1rem;
+                margin-top: 4rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .section-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .info-text {
+                font-size: 0.9rem;
+                padding: 0 0.5rem;
+                margin: 1.2rem auto;
+            }
+
+            .rounds-grid, .prize-cards {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 0 0.5rem;
+            }
+
+            .round-card, .prize-card {
+                padding: 1rem;
+            }
+
+            .icon-circle {
+                width: 2.8rem;
+                margin-right: 0.8rem;
+            }
+
+            .icon-circle i {
+                font-size: 1.3rem;
+            }
+
+            .navbar {
+                gap: 0.3rem;
+            }
+
+            .navbar a {
+                font-size: 0.85rem;
+                padding: 0.3rem 0.6rem;
+            }
+
+            .header {
+                padding: 0.8rem;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            .whatsapp-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+                width: 90%;
+                margin: 1.5rem auto;
+            }
+        }
+
+        /* Landscape phones */
+        @media (min-width: 576px) and (max-width: 767px) {
+            .ctf-content {
+                padding: 1.2rem;
+                margin-top: 4.5rem;
+            }
+
+            .rounds-grid, .prize-cards {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Tablets */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .rounds-grid, .prize-cards {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .info-text {
+                max-width: 90%;
+            }
+        }
+
+        /* Small desktops */
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .rounds-grid, .prize-cards {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.8rem;
+            }
+
+            .info-text {
+                max-width: 85%;
+            }
+        }
+
+        /* Large desktops */
+        @media (min-width: 1200px) {
+            .info-text {
+                max-width: 1000px;
+            }
+
+            .rounds-grid, .prize-cards {
+                max-width: 1400px;
+                margin-left: auto;
+                margin-right: auto;
+                gap: 2rem;
+            }
+        }
+
+        /* Handle different aspect ratios */
+        @media (max-aspect-ratio: 16/9) {
+            .ctf-content {
+                margin-top: max(4rem, 10vh);
+            }
+        }
+
+        @media (max-aspect-ratio: 3/4) {
+            .rounds-grid, .prize-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Handle ultra-wide screens */
+        @media (min-width: 1600px) {
+            .ctf-content {
+                max-width: 1600px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        /* Handle very small heights */
+        @media (max-height: 600px) {
+            .ctf-content {
+                margin-top: 3.5rem;
+            }
+
+            .section-header {
+                margin-bottom: 1.5rem;
+            }
+
+            .prize-section {
+                margin: 2rem 0;
+            }
+        }
+
+        /* Handle device pixel ratio for better text rendering */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .info-text, .round-description, .prize-description {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+        }
+
+        /* Safe area insets for notched phones */
+        @supports (padding: max(0px)) {
+            .header {
+                padding-left: max(1rem, env(safe-area-inset-left));
+                padding-right: max(1rem, env(safe-area-inset-right));
+            }
+
+            .ctf-content {
+                padding-left: max(1rem, env(safe-area-inset-left));
+                padding-right: max(1rem, env(safe-area-inset-right));
+            }
+        }
+
+        /* Hamburger menu styles */
+        .menu-btn {
+            display: none;
+            color: #00ffff;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        /* Mobile navbar styles */
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+            }
+
+            .navbar {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: rgba(19, 21, 29, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                transition: 0.3s ease;
+                border-left: 1px solid rgba(0, 255, 255, 0.1);
+            }
+
+            .navbar.active {
+                right: 0;
+            }
+
+            .navbar a {
+                font-size: 1.2rem;
+                padding: 0.8rem 2rem;
+                width: 80%;
+                text-align: center;
+                border: 1px solid rgba(0, 255, 255, 0.1);
+                border-radius: 0.5rem;
+            }
+
+            .navbar a:hover {
+                background: rgba(0, 255, 255, 0.1);
+            }
+
+            /* Overlay when menu is open */
+            .menu-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(3px);
+                z-index: 90;
+            }
+
+            .menu-overlay.active {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+    <script src="../JAVASCRIPT/matrix.js"></script>
+
+    <header class="header">
+        <a href="#" class="logo">{Cybernerds KARE}</a>
+        <div class="menu-btn">
+            <i class='bx bx-menu'></i>
+        </div>
+        <nav class="navbar">
+            <a href="/" style="--i: 1">Home</a>
+            <a href="/cts" style="--i: 2">CTF Event</a>
+            <a href="/cts/register" style="--i: 3">Register Now</a>
+        </nav>
+    </header>
+
+    <div class="menu-overlay"></div>
+
+    <section class="ctf-content">
+        <div class="section-header">
+            <h1 class="section-title">Cyber Tech Sprint</h1>
+            <p class="section-subtitle">Test your cybersecurity skills in this three-round challenge</p>
+        </div>
+
+        <p class="info-text">
+            Join us for an exciting journey through the world of cybersecurity! The <span class="highlight">Cyber Tech Sprint</span> is designed to test and enhance your skills across various security domains. From basic CTF challenges to advanced exploitation techniques, this event will push your limits and reward your expertise.
+        </p>
+
+        <div class="rounds-grid">
+            <div class="round-card">
+                <div class="round-header">
+                    <div class="icon-circle">
+                        <i class='bx bx-target-lock'></i>
+                    </div>
+                    <h3 class="round-title">Round 1</h3>
+                </div>
+                <p class="round-description">Basic CTF challenges testing fundamental cybersecurity knowledge. Test your skills in cryptography, web security, and basic exploitation. Registrations open now!</p>
+            </div>
+
+            <div class="round-card">
+                <div class="round-header">
+                    <div class="icon-circle">
+                        <i class='bx bx-code-block'></i>
+                    </div>
+                    <h3 class="round-title">Round 2</h3>
+                </div>
+                <p class="round-description">Advanced challenges focusing on exploitation and defense techniques. Dive deep into reverse engineering, binary exploitation, and advanced web security. Qualify Round 1 to participate.</p>
+            </div>
+
+            <div class="round-card">
+                <div class="round-header">
+                    <div class="icon-circle">
+                        <i class='bx bx-trophy'></i>
+                    </div>
+                    <h3 class="round-title">Round 3</h3>
+                </div>
+                <p class="round-description">Final round with real-world scenarios and complex challenges. Face off against sophisticated security problems and showcase your expertise. Top performers from Round 2 will compete.</p>
+            </div>
+        </div>
+
+        <div class="prize-section">
+            <h2 class="section-title">Exciting Prizes</h2>
+            <div class="prize-cards">
+                <div class="prize-card">
+                    <div class="prize-icon">
+                        <i class='bx bx-gift'></i>
+                    </div>
+                    <h3 class="prize-title">Top 10 Performers</h3>
+                    <p class="prize-description">Win exciting goodies worth ₹6,000</p>
+                </div>
+                <div class="prize-card">
+                    <div class="prize-icon">
+                        <i class='bx bx-medal'></i>
+                    </div>
+                    <h3 class="prize-title">Best Performer</h3>
+                    <p class="prize-description">Cybernerds Best Performer Award with ₹3,000 cash prize at semester end</p>
+                </div>
+            </div>
+        </div>
+
+        <a href="https://chat.whatsapp.com/GiqykegzNIsGgUhZBhL6cP" target="_blank" class="whatsapp-button">
+            <i class='bx bxl-whatsapp'></i>
+            Join Event WhatsApp Group
+        </a>
+
+        <div style="text-align: center;">
+            <a href="/cts/register" class="cta-button">Register Now</a>
+        </div>
+    </section>
+
+    <script>
+        const menuBtn = document.querySelector('.menu-btn');
+        const navbar = document.querySelector('.navbar');
+        const overlay = document.querySelector('.menu-overlay');
+        const menuIcon = menuBtn.querySelector('i');
+
+        menuBtn.addEventListener('click', () => {
+            navbar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            
+            // Toggle menu icon
+            if (navbar.classList.contains('active')) {
+                menuIcon.classList.remove('bx-menu');
+                menuIcon.classList.add('bx-x');
+            } else {
+                menuIcon.classList.remove('bx-x');
+                menuIcon.classList.add('bx-menu');
+            }
+        });
+
+        // Close menu when clicking overlay
+        overlay.addEventListener('click', () => {
+            navbar.classList.remove('active');
+            overlay.classList.remove('active');
+            menuIcon.classList.remove('bx-x');
+            menuIcon.classList.add('bx-menu');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.navbar a').forEach(link => {
+            link.addEventListener('click', () => {
+                navbar.classList.remove('active');
+                overlay.classList.remove('active');
+                menuIcon.classList.remove('bx-x');
+                menuIcon.classList.add('bx-menu');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -355,3 +355,70 @@ canvas {
     opacity: 1;
   }
 }
+
+
+.event {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 70px 10% 0;
+}
+
+.event-content {
+  max-width: 800px;
+  padding: 50px;
+}
+
+.event-content h2 {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: slideRight 1s ease forwards;
+  animation-delay: 0.7s;
+}
+
+.event-rounds {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.round {
+  flex: 1;
+  margin: 0 10px;
+  padding: 20px;
+  background: rgba(0, 128, 0, 0.1);
+  border-radius: 10px;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 1s;
+}
+
+.round h4 {
+  color: rgb(0, 255, 0);
+  margin-bottom: 10px;
+}
+
+.event-outcomes {
+  margin-top: 2rem;
+  opacity: 0;
+  animation: slideLeft 1s ease forwards;
+  animation-delay: 1.3s;
+}
+
+.event-outcomes ul {
+  list-style-type: none;
+  padding-left: 1rem;
+}
+
+.event-outcomes ul li::before {
+  content: "•";
+  color: rgb(0, 255, 0);
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
